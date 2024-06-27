@@ -1,0 +1,3 @@
+[submodule "op-connect"]
+	path = op-connect
+	url = https://dewittn@github.com/dewittn/docker-op-connect
