@@ -1,7 +1,11 @@
 ---
 services:
   pihole:
-    image: pihole/pihole:latest
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM pihole/pihole:latest
+        ADD 03-custom.conf /etc/dnsmasq.d/
     networks:
       - traefik
     ports:
