@@ -1,3 +1,5 @@
 **/certs/*
 !**/.gitkeep
 1password-credentials.json
+03-custom.conf
+.env
