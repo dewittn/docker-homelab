@@ -7,6 +7,7 @@ services:
     networks:
       - op-connect
     environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}?ephemeral=true
       - TS_EXTRA_ARGS=--advertise-tags=tag:container
       - TS_STATE_DIR=/var/lib/tailscale
     volumes:
