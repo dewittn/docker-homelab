@@ -1,0 +1,1 @@
+address=/{{op://$APP_ENV/pihole/website}}/{{op://$APP_ENV/pihole/ServerIP}}
