@@ -18,13 +18,17 @@ services:
     restart: unless-stopped
 
   op-connect-api:
-    bulid: connect-api
+    build:
+      context: .
+      dockerfile: connect-api/Dockerfile
     volumes:
       - "data:/home/opuser/.op/data"
     network_mode: service:ts-op-connect
 
   op-connect-sync:
-    bulid: connect-sync
+    build:
+      context: .
+      dockerfile: connect-sync/Dockerfile
     volumes:
       - "data:/home/opuser/.op/data"
     networks:
