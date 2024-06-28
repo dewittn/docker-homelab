@@ -27,11 +27,6 @@ services:
   whoami:
     # A container that exposes an API to show its IP address
     image: traefik/whoami
-    labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`) || Host(`whoami.homelab.ndrc.co`)"
-      - "traefik.tcp.routers.whoami.tls=true"
-      - "traefik.tcp.routers.whoami.tls.domains[0].main=ndrc.co"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
     networks:
       - traefik
 
