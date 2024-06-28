@@ -1,0 +1,30 @@
+---
+services:
+  pihole:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM pihole/pihole:latest
+        ADD 03-custom.conf /etc/dnsmasq.d/
+    networks:
+      - traefik
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      TZ: "America/New_York"
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
+      ServerIP: ${PIHOLE_SERVERIP}
+      DNS1: ${PIHOLE_DNS1}
+      DNSMASQ_LISTENING: ${PIHOLE_DNSMASQ_LISTENING}
+    volumes:
+      - etc-pihole:/etc/pihole
+      - etc-dnsmasq:/etc/dnsmasq.d
+    restart: unless-stopped
+    labels:
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_SERVERIP}`) || Host(`${PIHOLE_WEBSITE}`)"
+
+volumes:
+  etc-pihole:
+  etc-dnsmasq:
