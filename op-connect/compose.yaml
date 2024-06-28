@@ -1,0 +1,25 @@
+---
+services:
+  op-connect-api:
+    build:
+      context: .
+      dockerfile: connect-api/Dockerfile
+    volumes:
+      - "data:/home/opuser/.op/data"
+    networks:
+      - op-connect
+
+  op-connect-sync:
+    build:
+      context: .
+      dockerfile: connect-sync/Dockerfile
+    volumes:
+      - "data:/home/opuser/.op/data"
+    networks:
+      - op-connect
+
+volumes:
+  data:
+
+networks:
+  op-connect:

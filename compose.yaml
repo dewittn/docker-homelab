@@ -4,8 +4,8 @@
 name: homelab
 
 include:
-  - path: op-connect/docker-homelab-compose.yaml
-  - path: pihole/homelab-compose.yaml
+  - path: op-connect/compose.yaml
+  # - path: pihole/homelab-compose.yaml
 
 services:
   traefik:
