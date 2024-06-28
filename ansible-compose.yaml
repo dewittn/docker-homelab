@@ -3,8 +3,8 @@
 # https://docs.docker.com/go/compose-spec-reference/
 name: homelab
 
-# include:
-#   - path: op-connect/docker-homelab-compose.yaml
+include:
+  - path: op-connect/ansible-compose.yaml
 #   - path: pihole/homelab-compose.yaml
 
 services:
@@ -29,6 +29,8 @@ services:
     image: traefik/whoami
     networks:
       - traefik
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`) || Host(`whoami.homelab.ndrc.co`)"
 
 volumes:
   traefik:
