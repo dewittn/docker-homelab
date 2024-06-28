@@ -1,0 +1,37 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+name: homelab
+
+# include:
+#   - path: op-connect/docker-homelab-compose.yaml
+#   - path: pihole/homelab-compose.yaml
+
+services:
+  traefik:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM traefik
+        ADD traefik/ /etc/traefik/
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # The Web UI (enabled by --api.insecure=true)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik:/etc/traefik/
+    networks:
+      - traefik
+
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami
+    networks:
+      - traefik
+
+volumes:
+  traefik:
+
+networks:
+  traefik:
