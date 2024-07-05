@@ -17,12 +17,12 @@ services:
       ServerIP: ${PIHOLE_SERVERIP}
       DNS1: ${PIHOLE_DNS1}
       DNSMASQ_LISTENING: ${PIHOLE_DNSMASQ_LISTENING}
+      BLOCK_ICLOUD_PR: false
     volumes:
       - etc-pihole:/etc/pihole
       - etc-dnsmasq:/etc/dnsmasq.d
     restart: unless-stopped
     labels:
-      - "traefik.http.services.pihole.loadbalancer.server.port=80"
       - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_SERVERIP}`) || Host(`${PIHOLE_WEBSITE}`)"
 
 volumes:
